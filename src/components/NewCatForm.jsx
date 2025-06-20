@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import FormInput from './FormInput';
+import PropTypes from 'prop-types';
+
 const kDefaultFormState = {
   name: '',
   personality: '',
@@ -19,41 +22,30 @@ const NewCatForm = ({ onPostCat }) => {
       return { ...formData, [inputName]: inputValue };
     });
   };
+
+  const generateInputs = () => {
+    //create a list of input component for each input field
+    return Object.entries(formData).map(([inputName, value]) => {
+      return <FormInput 
+        key={inputName}
+        inputName={inputName} 
+        value={value} 
+        handleChange={handleChange} />;
+    });
+  };
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor='input-name'>Cat Name:</label>
-        <input 
-          type='text' 
-          id='input-name' 
-          name='name' 
-          value={formData.name} 
-          onChange={handleChange}/>
-      </div>
-       <div>
-        <label htmlFor='input-perosnality'>Cat personality:</label>
-        <input 
-          type='text' 
-          id='input-personality' 
-          name='personality' 
-          value={formData.personality} 
-          onChange={handleChange}/>
-      </div>
-       <div>
-        <label htmlFor='input-color'>Cat Color:</label>
-        <input 
-          type='text' 
-          id='input-color' 
-          name='color' 
-          value={formData.color} 
-          onChange={handleChange}/>
-      </div>
+      {generateInputs()}
       <div>
         {/* <input type='submit'>Add Cat</input> */}
         <button className='form-button'>Add Cat</button>
       </div>
     </form>
   );
+};
+
+NewCatForm.propTypes = {
+  onPostCat: PropTypes.func.isRequired,
 };
 
 export default NewCatForm;
