@@ -5,18 +5,44 @@
   text-align: center;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
 .cat {
-  background-color: grey;
   padding: 5px;
-  margin-bottom: 15px;
+  margin: 15px;
   width: 200px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 400px;
+  height: 300px;
+  font-size: x-large;
+}
+
+form, .cat {
+  background-color: mediumslateblue;
+  border-radius: 10px;
 }
 
 ul {
   list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   padding: 0;
 }
 
 .cat > button {
-  margin-bottom: 10px;
+  margin: 10px;
+}
+
+.form-button {
+  margin-top: 10px;
 }
