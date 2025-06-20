@@ -102,6 +102,7 @@ function App() {
 
   const postCat = (newCatData) => {
     postCatApi(newCatData);
+    setCatData(catData => [...catData, newCatData]);
   };
 
   return (

@@ -1,19 +1,23 @@
 import { useState } from 'react';
+const kDefaultFormState = {
+  name: '',
+  personality: '',
+  color: '',
+};
 const NewCatForm = ({ onPostCat }) => {
-  const [name, setName] = useState('');
+  const [formData, setFormData] = useState(kDefaultFormState);
+  // const [name, setName] = useState('');
   const handleSubmit = (event) => {
     event.preventDefault();//stop existing form behavior
-    const newCat = {
-      name,
-      personality: '',
-      color: '',
-      pet_count: 0
-    };
-    onPostCat(newCat);
-    setName(''); //clear out the status of form
+    onPostCat(formData);
+    setFormData(kDefaultFormState); //clear out the status of form
   };
   const handleChange = (event) => {
-    setName(event.target.value);
+    const inputName = event.target.name;
+    const inputValue = event.target.value;
+    setFormData(formData => {
+      return { ...formData, [inputName]: inputValue };
+    });
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -23,7 +27,25 @@ const NewCatForm = ({ onPostCat }) => {
           type='text' 
           id='input-name' 
           name='name' 
-          value={name} 
+          value={formData.name} 
+          onChange={handleChange}/>
+      </div>
+       <div>
+        <label htmlFor='input-perosnality'>Cat personality:</label>
+        <input 
+          type='text' 
+          id='input-personality' 
+          name='personality' 
+          value={formData.personality} 
+          onChange={handleChange}/>
+      </div>
+       <div>
+        <label htmlFor='input-color'>Cat Color:</label>
+        <input 
+          type='text' 
+          id='input-color' 
+          name='color' 
+          value={formData.color} 
           onChange={handleChange}/>
       </div>
       <div>
